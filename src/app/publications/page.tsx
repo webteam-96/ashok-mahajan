@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import PublicationsGallery from './_components/PublicationsGallery';
 
-export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Publications',

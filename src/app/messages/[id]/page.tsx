@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 
-export const dynamic = 'force-dynamic';
+export async function generateStaticParams() {
+  const messages = await prisma.galleryImage.findMany({
+    where: { published: true, album: 'messages' },
+    select: { id: true },
+  });
+  return messages.map((m) => ({ id: String(m.id) }));
+}
 
 // ---------------------------------------------------------------------------
 // Metadata

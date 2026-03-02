@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const dynamic = 'force-dynamic';
 
 const AWARD_PHOTOS = [
   { src: '/uploads/2025/07/award-jupitar1.jpg',                          alt: 'Jupiter Hospital Award' },

@@ -4,8 +4,13 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 
-export const dynamic = 'force-dynamic';
-
+export async function generateStaticParams() {
+  const posts = await prisma.blogPost.findMany({
+    where: { published: true, category: 'covid-india-task-force' },
+    select: { slug: true },
+  });
+  return posts.map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata({
   params,

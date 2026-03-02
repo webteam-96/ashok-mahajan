@@ -1,7 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -64,14 +63,6 @@ function LinkedInIcon() {
 }
 
 export default function Footer() {
-  const [visitCount, setVisitCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    fetch('/api/visits', { method: 'POST' })
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((d) => setVisitCount(typeof d.count === 'number' ? d.count : 23000))
-      .catch(() => setVisitCount(23000));
-  }, []);
 
   return (
     <footer style={{ background: "#000f2b", color: "#ffffff" }}>
@@ -206,7 +197,7 @@ export default function Footer() {
             {/* Visitor Counter */}
             <div className="mt-6">
               <p className="m-0 text-3xl font-bold" style={{ color: "#ffffff", fontFamily: "Sarala, sans-serif" }}>
-                {visitCount !== null ? visitCount.toLocaleString() : "…"}
+                23,000+
               </p>
               <p className="m-0 text-xs mt-1 flex items-center gap-1" style={{ color: "#9dca00", fontFamily: "PT Sans, sans-serif" }}>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

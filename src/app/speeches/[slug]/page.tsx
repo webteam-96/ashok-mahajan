@@ -3,10 +3,15 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 
+export async function generateStaticParams() {
+  const speeches = await prisma.speech.findMany({
+    where: { published: true },
+    select: { slug: true },
+  });
+  return speeches.map((s) => ({ slug: s.slug }));
+}
+
 // ---------------------------------------------------------------------------
-// ISR — revalidate every hour; individual pages are pre-built at build time
-// ---------------------------------------------------------------------------
-export const dynamic = 'force-dynamic';
 
 // ---------------------------------------------------------------------------
 // Dynamic metadata
