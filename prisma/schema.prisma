@@ -1,0 +1,123 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../node_modules/.prisma/client"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model BlogPost {
+  id             Int      @id @default(autoincrement())
+  title          String
+  slug           String   @unique
+  content        String
+  excerpt        String?
+  featuredImage  String?
+  category       String   @default("blog")
+  author         String   @default("Ashok Mahajan")
+  publishedDate  DateTime @default(now())
+  seoTitle       String?
+  seoDescription String?
+  published      Boolean  @default(true)
+  wpId           Int?     @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Speech {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  content     String
+  eventName   String?
+  date        DateTime?
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Award {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  image       String
+  description String?
+  year        Int?
+  order       Int?     @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Video {
+  id         Int       @id @default(autoincrement())
+  title      String
+  youtubeUrl String?
+  videoFile  String?
+  thumbnail  String?
+  date       DateTime?
+  published  Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model GalleryImage {
+  id        Int      @id @default(autoincrement())
+  title     String?
+  image     String
+  caption   String?
+  album     String?
+  order     Int?     @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Publication {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  description String?
+  coverImage  String?
+  pdfFile     String?
+  year        Int?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MediaFile {
+  id          Int      @id @default(autoincrement())
+  title       String?
+  file        String
+  fileType    String   @default("document")
+  mimeType    String?
+  description String?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PageContent {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("editor")
+  createdAt DateTime @default(now())
+}
+
+model SiteSetting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
